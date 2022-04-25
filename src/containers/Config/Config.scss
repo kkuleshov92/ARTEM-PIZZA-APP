@@ -1,0 +1,11 @@
+.config {
+  &__required-props {
+    display: flex;
+  }
+
+  &__required-prop {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+}
