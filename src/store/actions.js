@@ -1,0 +1,1 @@
+export const CHANGE_REQUIRED_PROP = (payload) => ({type: 'required_prop', payload});

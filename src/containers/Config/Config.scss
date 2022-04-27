@@ -1,3 +1,5 @@
+@import 'src/styles/vars';
+
 .config {
   &__required-props {
     display: flex;
@@ -6,6 +8,79 @@
   &__required-prop {
     &:not(:last-child) {
       margin-right: 20px;
+    }
+  }
+}
+
+.config-sauce-prop {
+  display: flex;
+  flex-direction: column;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__label {
+    cursor: pointer;
+    font-size: 16px;
+    line-height: (24/16);
+    color: $mainGray;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 12px;
+    border: 2px solid #E1E1ED;
+    box-sizing: border-box;
+    transition: .3s ease;
+
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+
+    &[data-is-check="true"] {
+      color: $mainDark;
+      background: #fff;
+      box-shadow: 0px 3px 4px rgba(75, 75, 124, 0.05), 0px 0px 2px rgba(75, 75, 124, 0.2);
+      border-color: #00A896;
+    }
+
+    &:hover {
+      color: $mainDark;
+    }
+  }
+}
+
+.config-main-prop {
+  &__list {
+    background: #F9F9FB;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    border-radius: 14px;
+  }
+
+  &__label {
+    cursor: pointer;
+    font-size: 16px;
+    line-height: (24/16);
+    color: $mainGray;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 12px;
+    transition: .3s ease;
+
+    &:not(:last-child) {
+      margin-right: 2px;
+    }
+
+    &[data-is-check="true"] {
+      color: $mainDark;
+      background: #fff;
+      box-shadow: 0px 3px 4px rgba(75, 75, 124, 0.05), 0px 0px 2px rgba(75, 75, 124, 0.2);
+    }
+
+    &:hover {
+      color: $mainDark;
     }
   }
 }

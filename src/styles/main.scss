@@ -17,6 +17,27 @@ button {
   line-height: (36/28);
 }
 
+.button {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: (24/20);
+  color: #fff;
+  background: #00A896;
+  border-radius: 15px;
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+  transition: .3s ease;
+
+  &:hover {
+    background: #018576;
+  }
+
+  &:active {
+    background: #007266;
+  }
+}
+
 .button-link {
   display: flex;
   align-items: center;
@@ -31,4 +52,12 @@ button {
   img {
     margin-right: 10px;
   }
+}
+
+.label-name {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: (24/16);
+  color: #4B4B7C;
+  margin-bottom: 15px;
 }

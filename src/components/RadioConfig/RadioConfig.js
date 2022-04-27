@@ -1,7 +1,10 @@
 import React from 'react';
 
-import './RadioConfig.scss';
 import { useController } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { CHANGE_REQUIRED_PROP } from "../../store/actions";
+
 
 const RadioConfig = (props) => {
   const {
@@ -13,6 +16,8 @@ const RadioConfig = (props) => {
     className,
   } = props;
 
+  const dispatch = useDispatch();
+
   const {
     field
   } = useController({
@@ -21,14 +26,22 @@ const RadioConfig = (props) => {
     defaultValue: radioConfigArr[0].value,
   });
 
-  return (
-    <div className={`radio-controls ${className}`}>
-      <h4 className="radio-controls__name">{radioGroupName}</h4>
+  const onChangeCustom = (e) => {
+    field.onChange(e);
+    dispatch(CHANGE_REQUIRED_PROP({
+      propName: radioGroupValue,
+      value: e.target.value,
+    }));
+  }
 
-      <div className="radio-controls__list">
+  return (
+    <div className={className}>
+      <h4 className="label-name">{radioGroupName}</h4>
+
+      <div className={`${className}__list`}>
         {radioConfigArr.map((item, i) => (
           <label
-            className="radio-controls__label"
+            className={`${className}__label`}
             key={item.name}
             data-is-check={(!checkedItem) ? (i === 0) : (item.value === checkedItem)}>
             <input
@@ -37,6 +50,7 @@ const RadioConfig = (props) => {
               value={item.value}
               hidden
               defaultChecked={i === 0}
+              onChange={onChangeCustom}
             />
 
             {item.name}
