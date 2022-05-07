@@ -26,11 +26,13 @@ const RadioConfig = (props) => {
     defaultValue: radioConfigArr[0].value,
   });
 
-  const onChangeCustom = (e) => {
+  const onChangeCustom = (e, price, slug, name) => {
     field.onChange(e);
     dispatch(CHANGE_REQUIRED_PROP({
-      propName: radioGroupValue,
-      value: e.target.value,
+      groupName: radioGroupValue,
+      price,
+      slug,
+      name,
     }));
   }
 
@@ -43,14 +45,14 @@ const RadioConfig = (props) => {
           <label
             className={`${className}__label`}
             key={item.name}
-            data-is-check={(!checkedItem) ? (i === 0) : (item.value === checkedItem)}>
+            data-is-check={(!checkedItem) ? (i === 0) : (item.slug === checkedItem)}>
             <input
               type="radio"
               {...field}
-              value={item.value}
+              value={item.slug}
               hidden
               defaultChecked={i === 0}
-              onChange={onChangeCustom}
+              onChange={(e) => onChangeCustom(e, item.price, item.slug, item.name)}
             />
 
             {item.name}

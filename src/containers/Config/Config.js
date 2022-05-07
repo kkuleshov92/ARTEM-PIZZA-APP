@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useForm } from "react-hook-form";
 import RadioConfig from "../../components/RadioConfig/RadioConfig";
 
-import { useSelector } from "react-redux";
-import { getPrice } from "../../store/selectors";
+import { useDispatch, useSelector } from "react-redux";
 import CheckboxConfig from "../../components/CheckboxConfig/CheckboxConfig";
 
 import './Config.scss';
+import { getCurrentPrice, getPizzaProps } from "../../store/selectors";
+import { cheesesArr, doughArr, meatArr, sauceArr, sizeArr, vegetablesArr } from "./ConfigData";
+import { CALC_PIZZA_PRICE } from "../../store/actions";
 
 
 const Config = () => {
@@ -19,75 +21,13 @@ const Config = () => {
     console.log(data);
   }
 
-  const price = useSelector(getPrice);
+  const pizzaSettings = useSelector(getPizzaProps);
+  const price = useSelector(getCurrentPrice);
+  const dispatch = useDispatch();
 
-  const sizeArr = [
-    {
-      name: '30 см',
-      value: '30',
-    },
-    {
-      name: '35 см',
-      value: '35',
-    },
-  ]
-
-  const doughArr = [
-    {
-      name: 'Тонкое',
-      value: 'thin',
-    },
-    {
-      name: 'Пышное',
-      value: 'lush',
-    },
-  ]
-
-  const sauceArr = [
-    {
-      name: 'Томатный',
-      value: 'tomato',
-    },
-    {
-      name: 'Майонез',
-      value: 'mayonnaise',
-    },
-    {
-      name: 'Острый',
-      value: 'spicy',
-    },
-    {
-      name: 'Грибной',
-      value: 'mushroom',
-    },
-    {
-      name: 'Чесночный',
-      value: 'garlic',
-    },
-    {
-      name: 'Кисло-сладкий',
-      value: 'sweet_sour',
-    },
-    {
-      name: 'Горчичый',
-      value: 'mustard',
-    },
-  ]
-
-  const cheesesArr = [
-    {
-      name: 'Моцарелла',
-      value: 'mozzarella',
-    },
-    {
-      name: 'Чеддер',
-      value: 'cheddar',
-    },
-    {
-      name: 'Дор Блю',
-      value: 'dor_blue',
-    },
-  ]
+  useEffect(() => {
+    dispatch(CALC_PIZZA_PRICE())
+  }, [pizzaSettings])
 
   return (
     <section className="config">
@@ -130,11 +70,31 @@ const Config = () => {
 
           <div className="config__cheeses-block">
             <CheckboxConfig
-              checkboxGriupName="Добавьте сыр"
+              checkboxGroupName="Добавьте сыр"
               checkboxGroupValue="cheese"
               checkboxConfigArr={cheesesArr}
               control={control}
-              className="config-cheese-prop"
+              className="config-additional-prop"
+            />
+          </div>
+
+          <div className="config__meat-block">
+            <CheckboxConfig
+              checkboxGroupName="Добавьте мясо"
+              checkboxGroupValue="meat"
+              checkboxConfigArr={meatArr}
+              control={control}
+              className="config-additional-prop"
+            />
+          </div>
+
+          <div className="config__vegetables-block">
+            <CheckboxConfig
+              checkboxGroupName="Добавьте овощи"
+              checkboxGroupValue="vegetables"
+              checkboxConfigArr={vegetablesArr}
+              control={control}
+              className="config-additional-prop"
             />
           </div>
 
