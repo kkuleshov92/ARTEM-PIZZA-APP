@@ -1,6 +1,13 @@
 @import 'src/styles/vars';
 
 .config {
+  &__props-constructor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
   &__required-props {
     display: flex;
   }
@@ -8,6 +15,12 @@
   &__required-prop {
     &:not(:last-child) {
       margin-right: 20px;
+    }
+  }
+
+  &__prop-block {
+    &:not(:last-child) {
+      margin-bottom: 30px;
     }
   }
 }
@@ -90,11 +103,21 @@
     display: flex;
   }
 
+  &__img-wrapper {
+    height: 70px;
+    width: 100%;
+    position: relative;
+  }
+
   &__img {
     max-width: 80px;
     max-height: 80px;
     margin-top: -10px;
     margin-bottom: 15px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
   }
 
   &__name {

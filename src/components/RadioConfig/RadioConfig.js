@@ -14,6 +14,7 @@ const RadioConfig = (props) => {
     checkedItem,
     control,
     className,
+    classNameLabel,
   } = props;
 
   const dispatch = useDispatch();
@@ -40,10 +41,10 @@ const RadioConfig = (props) => {
     <div className={className}>
       <h4 className="label-name">{radioGroupName}</h4>
 
-      <div className={`${className}__list`}>
+      <div className={`${classNameLabel}__list`}>
         {radioConfigArr.map((item, i) => (
           <label
-            className={`${className}__label`}
+            className={`${classNameLabel}__label`}
             key={item.name}
             data-is-check={(!checkedItem) ? (i === 0) : (item.slug === checkedItem)}>
             <input

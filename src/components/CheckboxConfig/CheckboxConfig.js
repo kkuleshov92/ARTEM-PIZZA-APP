@@ -12,6 +12,7 @@ const CheckboxConfig = (props) => {
     checkboxConfigArr,
     control,
     className,
+    classNameLabel,
   } = props;
 
   const [value, setValue] = useState([])
@@ -52,14 +53,16 @@ const CheckboxConfig = (props) => {
   }
 
   return (
-    <div>
+    <div className={className}>
       <h4 className="label-name">{checkboxGroupName}</h4>
 
-      <div className={`${className}__list`}>
+      <div className={`${classNameLabel}__list`}>
         {
           checkboxConfigArr.map((item, index) => (
-            <label key={item.name} data-is-checked={value.includes(item.slug)} className={`${className}__label`}>
-              <Image name={item.img} className={`${className}__img`}></Image>
+            <label key={item.name} data-is-checked={value.includes(item.slug)} className={`${classNameLabel}__label`}>
+              <div className={`${classNameLabel}__img-wrapper`}>
+                <Image name={item.img} className={`${classNameLabel}__img`}/>
+              </div>
 
               <input
                 type="checkbox"
@@ -69,14 +72,14 @@ const CheckboxConfig = (props) => {
                 checked={value.includes(item.slug)}
                 value={item.slug}/>
 
-              <div className={`${className}__name`}>{item.name}</div>
+              <div className={`${classNameLabel}__name`}>{item.name}</div>
 
-              <div className={`${className}__price-wrap`}>
+              <div className={`${classNameLabel}__price-wrap`}>
                 <div>
                   ${item.price}
                 </div>
 
-                <div data-is-checked={value.includes(item.slug)} className={`${className}__check-icon`}>
+                <div data-is-checked={value.includes(item.slug)} className={`${classNameLabel}__check-icon`}>
                   <SvgIcon
                     icon="check"
                     color="#fff"

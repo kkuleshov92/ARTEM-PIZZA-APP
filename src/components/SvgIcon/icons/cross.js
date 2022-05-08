@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const cross = ({color = '#4B4B7C', size, ...props}) => {
+const cross = ({color = '#4B4B7C', ...props}) => {
   return (
     <svg {...props} viewBox="0 0 16 16" fill="none">
       <path fillRule="evenodd" clipRule="evenodd"
