@@ -9,11 +9,14 @@ const orderReducer = (state = defaultPizza, action) => {
         ...state,
         settings: {
           ...state.settings,
-          [action.payload.groupName]: [{
-            price: action.payload.price,
-            name: action.payload.name,
-            slug: action.payload.slug,
-          }],
+          [action.payload.groupName]: {
+            ...state.settings[action.payload.groupName],
+            props: [{
+              price: action.payload.price,
+              name: action.payload.name,
+              slug: action.payload.slug,
+            }]
+          },
         }
       }
     case 'additional_prop':
@@ -22,11 +25,14 @@ const orderReducer = (state = defaultPizza, action) => {
           ...state,
           settings: {
             ...state.settings,
-            [action.payload.groupName]: [ ...state.settings[action.payload.groupName], {
-              price: action.payload.price,
-              name: action.payload.name,
-              slug: action.payload.slug,
-            }],
+            [action.payload.groupName]: {
+              ...state.settings[action.payload.groupName],
+              props: [ ...state.settings[action.payload.groupName].props, {
+                price: action.payload.price,
+                name: action.payload.name,
+                slug: action.payload.slug,
+              }]
+            },
           }
         }
       } else {
@@ -34,17 +40,20 @@ const orderReducer = (state = defaultPizza, action) => {
           ...state,
           settings: {
             ...state.settings,
-            [action.payload.groupName]: state.settings[action.payload.groupName]?.filter(prop => {
-              return prop.name !== action.payload.name
-            }),
+            [action.payload.groupName]: {
+              ...state.settings[action.payload.groupName],
+              props: state.settings[action.payload.groupName].props?.filter(prop => {
+                return prop.name !== action.payload.name
+              })
+            },
           }
         }
       }
 
     case 'calculation_price':
       const price = Object.values(state.settings).reduce((sum, current) => {
-        if (current.length) {
-          return sum + current.reduce((sum, current) => {
+        if (current.props.length) {
+          return sum + current.props.reduce((sum, current) => {
             return sum + current.price;
           }, 0);
         }
@@ -64,8 +73,4 @@ const orderReducer = (state = defaultPizza, action) => {
 export const store = configureStore({
   reducer: orderReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-})
-
-store.subscribe(() => {
-
 })

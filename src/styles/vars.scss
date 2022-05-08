@@ -5,3 +5,37 @@ $mainDark: #1F1F33;
 $mainGray: #4B4B7C;
 $lightGray: #8181B1;
 $green: #00A896;
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

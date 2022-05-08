@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { useForm } from "react-hook-form";
 import RadioConfig from "../../components/RadioConfig/RadioConfig";
@@ -10,16 +10,23 @@ import './Config.scss';
 import { getCurrentPrice, getPizzaProps } from "../../store/selectors";
 import { cheesesArr, doughArr, meatArr, sauceArr, sizeArr, vegetablesArr } from "./ConfigData";
 import { CALC_PIZZA_PRICE } from "../../store/actions";
+import { useModalContext } from "../../context/ModalContext";
 
 
 const Config = () => {
   const {handleSubmit, watch, control} = useForm({mode: "onChange"});
 
+  const {
+    openModal,
+  } = useModalContext()
+
   const chosenParams = watch();
 
-  const onSubmit = (data) => {
-    console.log(data);
-  }
+  const onSubmit = useCallback((data) => {
+    openModal({
+      type: 'preview',
+    })
+  }, [])
 
   const pizzaSettings = useSelector(getPizzaProps);
   const price = useSelector(getCurrentPrice);
