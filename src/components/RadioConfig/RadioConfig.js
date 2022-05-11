@@ -39,7 +39,7 @@ const RadioConfig = (props) => {
 
   return (
     <div className={className}>
-      <h4 className="label-name">{radioGroupName}</h4>
+      <h4 className={`label-name ${classNameLabel}__label-name`}>{radioGroupName}</h4>
 
       <div className={`${classNameLabel}__list`}>
         {radioConfigArr.map((item, i) => (

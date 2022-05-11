@@ -54,7 +54,7 @@ const CheckboxConfig = (props) => {
 
   return (
     <div className={className}>
-      <h4 className="label-name">{checkboxGroupName}</h4>
+      <h4 className={`label-name ${classNameLabel}__label-name`}>{checkboxGroupName}</h4>
 
       <div className={`${classNameLabel}__list`}>
         {

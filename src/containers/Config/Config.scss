@@ -29,6 +29,10 @@
   display: flex;
   flex-direction: column;
 
+  &__label-name {
+    margin-bottom: 10px;
+  }
+
   &__list {
     display: flex;
     flex-wrap: wrap;
@@ -64,6 +68,10 @@
 }
 
 .config-main-prop {
+  &__label-name {
+    margin-bottom: 10px;
+  }
+
   &__list {
     background: #F9F9FB;
     padding: 2px;
@@ -99,6 +107,10 @@
 }
 
 .config-additional-prop {
+  &__label-name {
+    margin-bottom: 25px;
+  }
+
   &__list {
     display: flex;
   }
