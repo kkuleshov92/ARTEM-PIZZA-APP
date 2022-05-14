@@ -26,7 +26,7 @@ const Config = () => {
     openModal({
       type: 'preview',
     })
-  }, [])
+  }, [openModal])
 
   const pizzaSettings = useSelector(getPizzaProps);
   const price = useSelector(getCurrentPrice);
@@ -34,7 +34,7 @@ const Config = () => {
 
   useEffect(() => {
     dispatch(CALC_PIZZA_PRICE())
-  }, [ pizzaSettings ])
+  }, [ pizzaSettings, dispatch ])
 
   return (
     <section className="config">

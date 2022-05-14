@@ -23,7 +23,7 @@ export const ModalProvider = (props) => {
         ? [...prevState]
         : [ ...prevState, newModal ]
     });
-  }, [modals])
+  }, [])
 
   const closeModal = useCallback((type) => {
     setClosedModals(prevState => [ ...prevState, type ]);
