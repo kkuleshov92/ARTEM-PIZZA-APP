@@ -1,18 +1,43 @@
 import React from 'react';
 
-import Config from "./containers/Config/Config";
-import Header from "./containers/Header/Header";
+import { Route, Routes } from 'react-router-dom';
+
+import Modals from "./components/Modals/Modals";
+import { ModalProvider } from "./context/ModalContext";
 
 import './styles/main.scss';
-import { ModalProvider } from "./context/ModalContext";
-import Modals from "./components/Modals/Modals";
+import { ROUTES } from "./config/constants";
+import Login from "./pages/Login";
+import OrderPage from "./pages/OrderPage";
+import RequireAuth from "./hoc/RequireAuth";
+import { AuthProvider } from "./context/AuthContext";
+import Layout from "./Layout";
+import Config from "./containers/Config/Config";
+import Order from "./containers/Order";
+import OrderList from "./containers/OrderList";
+
 
 function App() {
   return (
     <ModalProvider>
-      <Modals/>
-      <Header/>
-      <Config/>
+      <AuthProvider>
+        <Modals/>
+
+        <Routes>
+          <Route path="/" element={<Layout/>}>
+            <Route path={ROUTES.login} element={<Login/>}/>
+            <Route path={ROUTES.home + "/*"} element={
+              <RequireAuth>
+                <OrderPage/>
+              </RequireAuth>
+            }>
+              <Route path={ROUTES.constructor} element={<Config/>}/>
+              <Route path={ROUTES.order} element={<Order/>}/>
+              <Route path={ROUTES.orderList} element={<OrderList/>}/>
+            </Route>
+          </Route>
+        </Routes>
+      </AuthProvider>
     </ModalProvider>
   );
 }

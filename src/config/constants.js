@@ -1,3 +1,11 @@
+export const ROUTES = {
+  login: '/login',
+  home: '/home',
+  orderList: 'order-list',
+  order: 'order',
+  constructor: 'constructor'
+}
+
 export const defaultPizza = {
   settings: {
     size: {
