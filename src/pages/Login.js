@@ -8,7 +8,7 @@ const Login = () => {
   const {
     signIn,
   } = useAuthContext();
-
+  console.log('login')
   const navigate = useNavigate();
   const location = useLocation();
 

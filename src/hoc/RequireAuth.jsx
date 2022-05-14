@@ -5,7 +5,7 @@ import { useAuthContext } from "../context/AuthContext";
 const RequireAuth = ({children}) => {
   const location = useLocation();
   const {user} = useAuthContext();
-
+  console.log('here')
   if (!user) {
     return <Navigate to={ROUTES.login} state={{from: location}}/>
   }
