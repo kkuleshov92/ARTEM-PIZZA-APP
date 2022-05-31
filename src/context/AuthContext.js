@@ -1,24 +1,18 @@
-import { createContext, useContext, useState } from 'react';
-
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthContext = createContext(null);
 
 
 export const AuthProvider = ({children}) => {
-  const [user, setUser] = useState(null);
+  const [ user, setUser ] = useState(null);
 
-  const signIn = (newUser, callback) => {
+  const handleAddUser = (newUser) => {
     setUser(newUser);
-    callback();
-  }
-  const signOut = (callback) => {
-    setUser(null);
-    callback();
   }
 
   return (
     <AuthContext.Provider
-      value={{user, signOut, signIn}}
+      value={{user, handleAddUser}}
     >
       {children}
     </AuthContext.Provider>

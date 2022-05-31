@@ -23,8 +23,8 @@ function App() {
         <Modals/>
 
         <Routes>
-          <Route path="/" element={<Navigate to={ROUTES.home} />} />
           <Route path={ROUTES.login} element={<Login/>}/>
+
           <Route path={ROUTES.home + "/*"} element={
             <RequireAuth>
               <OrderPage/>
@@ -34,6 +34,8 @@ function App() {
             <Route path={ROUTES.order} element={<Order/>}/>
             <Route path={ROUTES.orderList} element={<OrderList/>}/>
           </Route>
+
+          <Route path="*" element={<Navigate to={ROUTES.home + '/' + ROUTES.constructor}/>}/>
         </Routes>
       </AuthProvider>
     </ModalProvider>

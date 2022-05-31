@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 
 
 const OrderPage = () => {
+  console.log('order-page')
   return (
     <>
       <Header/>
