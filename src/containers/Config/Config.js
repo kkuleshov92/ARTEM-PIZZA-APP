@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
-
 import { useForm } from "react-hook-form";
 import RadioConfig from "../../components/RadioConfig/RadioConfig";
 
@@ -13,7 +11,6 @@ import { getCurrentPrice, getPizzaProps } from "../../store/selectors";
 import { cheesesArr, doughArr, meatArr, sauceArr, sizeArr, vegetablesArr } from "./ConfigData";
 import { CALC_PIZZA_PRICE } from "../../store/actions";
 import { useModalContext } from "../../context/ModalContext";
-import { ROUTES } from "../../config/constants";
 
 
 const Config = () => {
@@ -46,9 +43,6 @@ const Config = () => {
           <h2 className="title">
             Собери свою пиццу
           </h2>
-
-          <Link to={ROUTES.home + '/' + ROUTES.order}>Order</Link>
-          <Link to={ROUTES.home + '/' + ROUTES.orderList}>OrderList</Link>
 
           <form onSubmit={handleSubmit(onSubmit)} className="config__form">
             <div className="config__props-constructor">

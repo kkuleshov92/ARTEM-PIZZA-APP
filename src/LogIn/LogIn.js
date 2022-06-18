@@ -1,38 +1,19 @@
-import { useCallback, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, browserSessionPersistence, setPersistence } from "firebase/auth";
-import { useForm } from 'react-hook-form';
+import { useCallback, useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 import { useAuthContext } from "../context/AuthContext";
-import { ROUTES } from '../config/constants';
 
 import './LogIn.scss';
-import { useLocation, useNavigate } from "react-router-dom";
 
 
 const LogIn = () => {
   const {
-    user,
     handleAddUser,
   } = useAuthContext();
 
   const [ activeLoginTab, setActiveLoginTab ] = useState('sign_in');
 
-  const {
-    control,
-  } = useForm();
-
-  const navigate = useNavigate();
-  const location = useLocation();
-
   const auth = getAuth();
-
-  const fromPage = location.state?.from?.pathname || ROUTES.home + ROUTES.constructor;
-
-  useEffect(() => {
-    console.log(user)
-
-    user && navigate(fromPage, {replace: true})
-  }, [user]);
 
   const handleSignIn = useCallback((e) => {
     e.preventDefault();
@@ -52,7 +33,7 @@ const LogIn = () => {
       })
       .catch(error => console.log(error))
 
-  }, [])
+  }, [auth, handleAddUser])
 
   const handleTabToggle = (tab) => {
     setActiveLoginTab(tab)
@@ -71,7 +52,7 @@ const LogIn = () => {
         console.log(response)
       })
       .catch(error => console.log(error))
-  }, [])
+  }, [auth])
 
   return (
     <div className="login">

@@ -71,8 +71,6 @@ const orderReducer = (state = defaultPizza, action) => {
 }
 
 export const store = configureStore({
-  reducer: {
-    order: orderReducer,
-  },
+  reducer: orderReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })
