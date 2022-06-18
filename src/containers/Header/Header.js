@@ -1,12 +1,27 @@
 import React from 'react';
+import { getAuth, signOut } from "firebase/auth";
 
 import SvgIcon from "../../components/SvgIcon/SvgIcon";
 import logo from '../../assets/images/logo.svg';
 
 import './Header.scss';
+import { useAuthContext } from "../../context/AuthContext";
 
 
 const Header = () => {
+  const {
+    handleAddUser,
+  } = useAuthContext();
+
+  const auth = getAuth();
+
+  const logout = () => {
+    signOut(auth)
+      .then(response => {
+        handleAddUser(null)
+      })
+      .catch(error => console.log(error))
+  }
   return (
     <header className="header">
         <div className="header__wrapper">
@@ -21,6 +36,10 @@ const Header = () => {
             />
 
             <span>Мои заказы</span>
+          </button>
+
+          <button onClick={logout}>
+            Logout
           </button>
         </div>
     </header>
