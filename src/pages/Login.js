@@ -1,4 +1,4 @@
-import LogIn from "../LogIn/LogIn";
+import LogIn from "../containers/LogIn/LogIn";
 
 const Login = () => {
 

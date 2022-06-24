@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { CSSTransition } from "react-transition-group";
 
@@ -11,8 +11,9 @@ import Config from "./containers/Config/Config";
 import Order from "./containers/Order";
 import OrderList from "./containers/OrderList";
 import Login from "./pages/Login";
-import Header from "./containers/Header/Header";
 import GlobalLoader from "./components/GlobalLoader";
+import Home from "./pages/Home";
+import PrivateRoutes from "./pages/PrivateRoutes";
 
 const AppRouter = () => {
   const {
@@ -20,7 +21,9 @@ const AppRouter = () => {
     handleAddUser,
   } = useAuthContext();
 
-  const [isPending, setIsPending] = useState(true);
+  const [ isPending, setIsPending ] = useState(true);
+
+  const navigate = useNavigate();
 
   const auth = getAuth();
 
@@ -50,8 +53,12 @@ const AppRouter = () => {
   useEffect(() => {
     setTimeout(() => {
       user && setIsPending(false);
+
+      user
+        ? navigate(ROUTES.constructor)
+        : navigate(ROUTES.login)
     }, 1000)
-  }, [user])
+  }, [ user ])
 
   return (
     <>
@@ -65,17 +72,23 @@ const AppRouter = () => {
       </CSSTransition>
 
       {
-        user
-          ? (<>
-              <Header/>
+        <Routes>
+          <Route path={ROUTES.login + "/*"} element={<Login/>}/>
+          <Route path={ROUTES.home + "/*"} element={<PrivateRoutes/>}/>
+        </Routes>
+      }
 
-              <Routes>
+      {
+        user
+          ? (
+            <Routes>
+              <Route path={ROUTES.home} element={<Home/>}>
                 <Route path={ROUTES.constructor} element={<Config/>}/>
                 <Route path={ROUTES.order} element={<Order/>}/>
                 <Route path={ROUTES.orderList} element={<OrderList/>}/>
-                <Route path="*" element={<Navigate to={ROUTES.constructor}/>}/>
-              </Routes>
-            </>
+                <Route path="*" element={<main>404</main>}/>
+              </Route>
+            </Routes>
           )
           : (
             <Routes>

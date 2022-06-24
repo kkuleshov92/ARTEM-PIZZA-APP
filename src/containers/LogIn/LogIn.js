@@ -1,9 +1,11 @@
 import { useCallback, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
-import { useAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 import './LogIn.scss';
+import { ROUTES } from "../../config/constants";
 
 
 const LogIn = () => {
@@ -12,6 +14,8 @@ const LogIn = () => {
   } = useAuthContext();
 
   const [ activeLoginTab, setActiveLoginTab ] = useState('sign_in');
+
+  const navigate = useNavigate();
 
   const auth = getAuth();
 
@@ -30,6 +34,8 @@ const LogIn = () => {
           id: user.uid,
           token: user.accessToken,
         })
+
+        navigate(ROUTES.constructor);
       })
       .catch(error => console.log(error))
 
