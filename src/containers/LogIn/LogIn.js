@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "../../context/AuthContext";
 
@@ -16,6 +16,8 @@ const LogIn = () => {
   const [ activeLoginTab, setActiveLoginTab ] = useState('sign_in');
 
   const navigate = useNavigate();
+
+  const location = useLocation();
 
   const auth = getAuth();
 
@@ -35,11 +37,11 @@ const LogIn = () => {
           token: user.accessToken,
         })
 
-        navigate(ROUTES.constructor);
+        navigate(location.state.pathname || ROUTES.home);
       })
       .catch(error => console.log(error))
 
-  }, [auth, handleAddUser])
+  }, [auth, handleAddUser, location.state.pathname, navigate])
 
   const handleTabToggle = (tab) => {
     setActiveLoginTab(tab)

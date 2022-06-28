@@ -1,9 +1,8 @@
 export const ROUTES = {
   login: '/login',
-  home: '/',
+  home: '/home',
   orderList: '/order-list',
   order: '/order',
-  constructor: '/constructor'
 }
 
 export const defaultPizza = {
