@@ -16,7 +16,7 @@ const AppRouter = () => {
     user,
     handleAddUser,
   } = useAuthContext();
-
+  console.log(user)
   const [ isPending, setIsPending ] = useState(true);
 
   const [ isChecked, setIsChecked ] = useState(false);
@@ -34,18 +34,24 @@ const AppRouter = () => {
 
   useEffect(() => {
     if (isChecked) {
-      user
-        ? navigate(ROUTES.home)
-        : navigate(ROUTES.login, {state: location})
+      if (location.pathname === ROUTES.login) {
+        navigate(ROUTES.home)
+      } else {
+        user
+          ? navigate(location.pathname || ROUTES.home)
+          : navigate(ROUTES.login, {state: location})
+      }
 
       setTimeout(() => {
         setIsPending(false);
       }, 500)
     }
-  }, [ isChecked, location, navigate, user ])
+    // eslint-disable-next-line
+  }, [ isChecked, user ])
 
   const checkAuthUser = useCallback((auth) => {
     onAuthStateChanged(auth, (user) => {
+      console.log(user)
       if (user) {
         handleAddUser({
           email: user.email,

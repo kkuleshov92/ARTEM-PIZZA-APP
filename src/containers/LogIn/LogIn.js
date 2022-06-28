@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -10,6 +10,7 @@ import { ROUTES } from "../../config/constants";
 
 const LogIn = () => {
   const {
+    user,
     handleAddUser,
   } = useAuthContext();
 
@@ -20,6 +21,13 @@ const LogIn = () => {
   const location = useLocation();
 
   const auth = getAuth();
+
+  useEffect(() => {
+    if (user) {
+      navigate(ROUTES.home)
+    }
+    // eslint-disable-next-line
+  }, [user])
 
   const handleSignIn = useCallback((e) => {
     e.preventDefault();
@@ -40,8 +48,8 @@ const LogIn = () => {
         navigate(location.state.pathname || ROUTES.home);
       })
       .catch(error => console.log(error))
-
-  }, [auth, handleAddUser, location.state.pathname, navigate])
+    // eslint-disable-next-line
+  }, [auth, handleAddUser])
 
   const handleTabToggle = (tab) => {
     setActiveLoginTab(tab)

@@ -1,4 +1,5 @@
 const Order = () => {
+  console.log('order')
   return (
     <div>
       Order

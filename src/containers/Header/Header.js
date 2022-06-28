@@ -17,7 +17,7 @@ const Header = () => {
 
   const logout = () => {
     signOut(auth)
-      .then(response => {
+      .then(() => {
         handleAddUser(null)
       })
       .catch(error => console.log(error))
